@@ -6,11 +6,11 @@
   "scripts": {
     "build": "webpack --mode production",
     "start": "node src/server/index.js",
-    "production": "npm run build && node start",
+    "production": "npm run build && node src/server/index.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "zip": "zip -r ./deploy.zip ./dist ./src/server package.json"
+    "zip": "zip -r ./deploy.zip ./dist ./src/server ./.ssl package.json"
   },
   "author": "husheng@",
   "license": "ISC",

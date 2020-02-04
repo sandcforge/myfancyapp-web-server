@@ -19,6 +19,7 @@ app.get('/api/host', (req, res) => {
     res.send(req.headers['host'] + '  : ' + String(Date.now()));
 });
 
-http.createServer(app).listen(process.env.PORT || 8080, () => {
-    console.log(`HTTP server is now running on port: ${process.env.PORT || 8080}`);
-  });
+const httpPort = process.env.PORT || 8080;
+http.createServer(app).listen(httpPort, () => {
+console.log(`HTTP server is now running on port: ${httpPort}`);
+});
