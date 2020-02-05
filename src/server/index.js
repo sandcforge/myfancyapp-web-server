@@ -26,6 +26,7 @@ app.get('/api/ping', (req, res) => {
     res.send(200);
 });
 
+// 'process.env.PORT' is a MUST if deployed in EB.
 const httpPort = process.env.PORT || 8080;
 
 http.createServer(app).listen(httpPort, () => {
