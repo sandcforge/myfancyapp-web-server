@@ -10,10 +10,10 @@ app.get('/api/getUsername', (req, res) => {
     res.send({ username: req.headers.host, appname: 'appname' });
 });
 
-// Get subdomain name
+// Get the address typed in browser.
 app.get('/api/host', (req, res) => {
     console.log(req.headers['host']);
-    res.send(req.headers['host'] + '  : ' + String(Date.now()));
+    res.send(req.headers['host']);
 });
 
 // Test endpoint.
@@ -21,9 +21,9 @@ app.get('/api/now', (req, res) => {
     res.send(Date.now().toString());
 });
 
-// ELB health check endpoint. Have to return 200, which is consistent with the ELB config.
-app.get('/api/ping', (req, res) => {
-    res.send(200);
+// ELB health check endpoint. Have to return status of 200, which is consistent with the ELB config.
+app.get('/api/ebhealthcheck', (req, res) => {
+    res.sendStatus(200);
 });
 
 // 'process.env.PORT' is a MUST if deployed in EB.
