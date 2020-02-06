@@ -2,8 +2,22 @@ const express = require('express');
 const os = require('os');
 const http = require('http');
 const fs = require('fs');
-const app = express();
+const winston = require('winston');
 
+const app = express();
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.combine(
+        winston.format.timestamp({
+          format: 'YYYY-MM-DD|HH:mm:ss'
+        }),
+        winston.format.printf(info => `${info.timestamp}|${info.level}: ${info.message}`)
+      ),
+    transports: [
+      new winston.transports.Console(),
+    ]
+  });
+  
 app.use(express.static('dist'));
 
 app.get('/api/getUsername', (req, res) => {
@@ -12,7 +26,7 @@ app.get('/api/getUsername', (req, res) => {
 
 // Get the address typed in browser.
 app.get('/api/host', (req, res) => {
-    console.log(req.headers['host']);
+    logger.info(req.headers['host']);
     res.send(req.headers['host']);
 });
 
@@ -30,5 +44,5 @@ app.get('/api/ebhealthcheck', (req, res) => {
 const httpPort = process.env.PORT || 8080;
 
 http.createServer(app).listen(httpPort, () => {
-console.log(`HTTP server is now running on port: ${httpPort}`);
+    logger.info(`HTTP server is now running on port: ${httpPort}`);
 });
