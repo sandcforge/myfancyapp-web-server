@@ -10,6 +10,8 @@
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "lint": "npx eslint --ignore-path .gitignore .",
+    "fix": "npx eslint --fix --ignore-path .gitignore .",
     "zip": "npm run build && rm -fr deploy.zip && zip -r ./deploy.zip ./dist ./src/server package.json"
   },
   "author": "husheng@",
@@ -31,7 +33,7 @@
     "clean-webpack-plugin": "^1.0.0",
     "concurrently": "^4.0.0",
     "css-loader": "^2.0.0",
-    "eslint": "^5.0.0",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
